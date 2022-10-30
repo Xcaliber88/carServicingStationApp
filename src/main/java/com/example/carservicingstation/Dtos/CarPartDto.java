@@ -1,5 +1,7 @@
 package com.example.carservicingstation.Dtos;
 
+import com.example.carservicingstation.Model.JobDescription;
+
 import java.util.List;
 
 public class CarPartDto {
@@ -19,6 +21,8 @@ public class CarPartDto {
     private String weight;
 
     private double price;
+
+    private JobDescription job;
 
 
     public Long getId() {
@@ -86,4 +90,6 @@ public class CarPartDto {
     public void setPrice(double price) {
         this.price = price;
     }
+
+
 }

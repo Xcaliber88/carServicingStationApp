@@ -1,7 +1,9 @@
 package com.example.carservicingstation.Services;
 
 import com.example.carservicingstation.Dtos.CarPartDto;
+import com.example.carservicingstation.Dtos.JobDto;
 import com.example.carservicingstation.Model.CarPart;
+import com.example.carservicingstation.Model.JobDescription;
 import com.example.carservicingstation.Repositories.CarPartRepository;
 import com.example.carservicingstation.exceptions.RecordNotFoundException;
 import org.springframework.stereotype.Service;
@@ -88,9 +90,18 @@ public class CarPartService {
 
         carPartRepos.deleteById(id);
     }
-    public static CarPartDto transferToCarPartDto(CarPart part){
+    public CarPartDto transferToCarPartDto(CarPart part){
 
         CarPartDto dto= new CarPartDto();
+//        List<JobDescription> jobList = new ArrayList<>();
+//        List<JobDto> jobDtoList = new ArrayList<>();
+//
+//        for (JobDescription job : jobList) {
+//            JobDto dtos = JobService.transferToJobDto(job);
+//            jobDtoList.add(dtos);
+//
+//            dto.setJobDtoList(jobDtoList);
+//        }
 
         dto.setId(part.getId());
         dto.setPartCategory(part.getPartCategory());
@@ -100,12 +111,22 @@ public class CarPartService {
         dto.setWeight(part.getWeight());
         dto.setOriginalStock(part.getOriginalStock());
         dto.setSold(part.getSold());
+//        dto.setJob(part.getJob());
 
         return dto;
     }
     public CarPart toPart(CarPartDto partDto){
 
         CarPart part = new CarPart();
+//        List<JobDescription> jobList = new ArrayList<>();
+//        List<JobDto> jobDtoList = new ArrayList<>();
+//
+//        for (JobDto jobDto : jobDtoList) {
+//            JobDescription job = JobService.toJob(jobDto);
+//            jobList.add(job);
+//
+//            part.setJobs(jobList);
+//        }
 
         part.setPartName(partDto.getPartName());
         part.setPartCategory(partDto.getPartCategory());
@@ -114,6 +135,7 @@ public class CarPartService {
         part.setOriginalStock(partDto.getOriginalStock());
         part.setSold(partDto.getSold());
         part.setPrice(partDto.getPrice());
+//        part.setJob(partDto.getJob());
 
         return part;
     }

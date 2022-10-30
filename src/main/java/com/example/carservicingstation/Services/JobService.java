@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobService {
 
     private final JobRepository jobRepos;
-    private final CarPartRepository carPartRepos;
+    private static  CarPartRepository carPartRepos;
 
     public JobService(JobRepository jobRepos, CarPartRepository carPartRepos) {
         this.jobRepos = jobRepos;
@@ -86,22 +87,23 @@ public class JobService {
 
 
         JobDto dto = new JobDto();
-        List<CarPart> partList = new ArrayList<>();
 
-        for (CarPart part : partList) {
-            CarPartDto dtos = CarPartService.transferToCarPartDto(part);
-            List<CarPart>.add(dtos);
-
-            CarPartDto dtos=
-            dto.setCarPartDtoList(CarPartService.transferToCarPartDto(part));
-            partList.add(part);
-        }
+//        List<CarPart> partList = carPartRepos.findAllById(job.getId());
+//        List<CarPartDto> carPartDtoList = new ArrayList<>();
+//
+//        for (CarPart part : partList) {
+//            CarPartDto dtos = CarPartService.transferToCarPartDto(part);
+//            carPartDtoList.add(dtos);
+//
+//            dto.setCarPartDtoList(carPartDtoList);
+//        }
 
             dto.setId(job.getId());
             dto.setJobsName(job.getJobsName());
             dto.setJobOverview(job.getJobOverview());
             dto.setLabourHours(job.getLabourHours());
             dto.setHourlyLabourCost(job.getHourlyLabourCost());
+            dto.setPart(job.getPart());
 
         return dto;
     }
@@ -109,13 +111,38 @@ public class JobService {
     public JobDescription toJob (JobDto jobDto){
 
         JobDescription job = new JobDescription();
+//        List<CarPart> partList = new ArrayList<>();
+//        List<CarPartDto> carPartDtoList = new ArrayList<>();
+//
+//        for (CarPartDto partDto : carPartDtoList) {
+//            CarPart part = CarPartService.toPart(partDto);
+//           partList.add(part);
+//
+//            job.setParts(partList);
+//        }
 
         job.setId(jobDto.getId());
         job.setJobsName(jobDto.getJobsName());
         job.setJobOverview(jobDto.getJobOverview());
         job.setLabourHours(jobDto.getLabourHours());
         job.setHourlyLabourCost(jobDto.getHourlyLabourCost());
+        job.setPart(jobDto.getPart());
 
         return job;
+    }
+
+    public JobDto assignCarPartToJob(Long jobId, Long partId){
+        Optional<CarPart> optionalCarPart = carPartRepos.findById(partId);
+        Optional<JobDescription> optionalJob = jobRepos.findById(jobId);
+
+        if (optionalJob.isPresent() && optionalCarPart.isPresent()){
+            JobDescription job = optionalJob.get();
+            CarPart part = optionalCarPart.get();
+            job.setPart(part);
+            jobRepos.save(job);
+            return transferToJobDto(job);
+        } else {
+            throw new RuntimeException("Job description or car part does not exist");
+        }
     }
 }

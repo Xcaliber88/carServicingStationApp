@@ -1,6 +1,8 @@
 package com.example.carservicingstation.Dtos;
 
-import java.util.List;
+import com.example.carservicingstation.Model.CarPart;
+
+import java.util.Optional;
 
 public class JobDto {
 
@@ -14,7 +16,7 @@ public class JobDto {
 
     private double hourlyLabourCost;
 
-    private List<CarPartDto> carPartDtoList;
+    private CarPart part;
 
 
     public Long getId() {
@@ -57,11 +59,11 @@ public class JobDto {
         this.hourlyLabourCost = hourlyLabourCost;
     }
 
-    public List<CarPartDto> getCarPartDtoList() {
-        return carPartDtoList;
+    public CarPart getPart() {
+        return part;
     }
 
-    public void setCarPartDtoList(List<CarPartDto> carPartDtoList) {
-        this.carPartDtoList = carPartDtoList;
+    public void setPart(CarPart part) {
+        this.part = part;
     }
 }

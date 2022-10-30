@@ -1,6 +1,8 @@
 package com.example.carservicingstation.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -25,10 +27,13 @@ public class CarPart {
     private String weight;
 
     private double price;
-    @ManyToOne
-    JobDescription job;
-    public CarPart(){}
 
+    @OneToOne(mappedBy = "part")
+    @JsonIgnore
+    private JobDescription job;
+
+
+    public CarPart(){}
     public CarPart(Long id, String partName, String partCategory, String partDescription, String originalStock, String sold, String weight, double price) {
         this.id = id;
         this.partName = partName;
@@ -102,5 +107,13 @@ public class CarPart {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public JobDescription getJob() {
+        return job;
+    }
+
+    public void setJob(JobDescription job) {
+        this.job = job;
     }
 }

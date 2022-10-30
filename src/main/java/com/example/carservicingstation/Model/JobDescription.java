@@ -21,8 +21,10 @@ public class JobDescription {
     private int labourHours;
     private double hourlyLabourCost;
 
-    @OneToMany(mappedBy = "job")
-    List<CarPart> parts;
+    @OneToOne
+    private CarPart part;
+
+
 
     public JobDescription(){}
 
@@ -63,11 +65,11 @@ public class JobDescription {
 
     public void setHourlyLabourCost(double hourlyLabourCost) { this.hourlyLabourCost = hourlyLabourCost;}
 
-    public List<CarPart> getParts() {
-        return parts;
+    public CarPart getPart() {
+        return part;
     }
 
-    public void setParts(List<CarPart> parts) {
-        this.parts = parts;
+    public void setPart(CarPart part) {
+        this.part = part;
     }
 }

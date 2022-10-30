@@ -56,4 +56,11 @@ public class JobControllers {
 
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/jobs/{jobId}/parts/{partId}")
+    public ResponseEntity<Object> assignCarPartToJob(@PathVariable Long jobId, @PathVariable Long partId){
+
+        JobDto jobDto = jobService.assignCarPartToJob(jobId,partId);
+        return  ResponseEntity.ok().body(jobDto);
+    }
 }
