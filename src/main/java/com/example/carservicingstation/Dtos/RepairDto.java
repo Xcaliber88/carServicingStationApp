@@ -1,37 +1,21 @@
-package com.example.carservicingstation.Model;
+package com.example.carservicingstation.Dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import com.example.carservicingstation.Model.JobDescription;
+import com.example.carservicingstation.Model.RepairJobDescription;
 
-import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
-@Entity
-@Table(name = "Repairs")
-public class Repair {
+public class RepairDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String repairName;
 
     private String repairDescription;
 
-    @OneToMany(mappedBy = "repair")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonIgnore
     private Collection<RepairJobDescription> repairJobDescriptions;
 
-    public Repair() {}
-
-    public Repair(Long id, String repairName, String repairDescription) {
-        this.id = id;
-        this.repairName = repairName;
-        this.repairDescription = repairDescription;
-    }
 
 
     public Long getId() {

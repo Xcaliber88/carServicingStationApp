@@ -36,8 +36,17 @@ INSERT INTO job_description (id, jobs_name, job_overview, labour_hours, hourly_l
                            (3012, 'APK testing','Inspection of fixed set of car parts and performances',3, 39),
                            (3013, 'Inspection of mall function', 'Diagnosis and Reporting', 8, 39);
 
+INSERT INTO         repairs (id, repair_name, repair_description)
+                    VALUES (4001, 'Major Service', 'Service at intervals of 40000KM'),
+                           (4002, 'Minor Service', 'Service at intervals of 20000KM'),
+                           (4003, 'Apk Keuring', 'Yearly vehicle testing'),
+                           (4004, 'Part change', 'Defective part replacement');
 
 
+INSERT INTO repair_job_description (job_id, repair_id)
+                        VALUES (3001, 4001),
+                               (3002,4001),
+                               (3003, 4001);
 
 
 

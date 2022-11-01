@@ -1,11 +1,10 @@
 package com.example.carservicingstation.Services;
 
-import com.example.carservicingstation.Dtos.CarPartDto;
 import com.example.carservicingstation.Dtos.JobDto;
 import com.example.carservicingstation.Model.CarPart;
 import com.example.carservicingstation.Model.JobDescription;
 import com.example.carservicingstation.Repositories.CarPartRepository;
-import com.example.carservicingstation.Repositories.JobRepository;
+import com.example.carservicingstation.Repositories.JobDescriptionRepository;
 import com.example.carservicingstation.exceptions.RecordNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,10 +16,10 @@ import java.util.Optional;
 @Service
 public class JobService {
 
-    private final JobRepository jobRepos;
-    private static  CarPartRepository carPartRepos;
+    private final JobDescriptionRepository jobRepos;
+    private final CarPartRepository carPartRepos;
 
-    public JobService(JobRepository jobRepos, CarPartRepository carPartRepos) {
+    public JobService(JobDescriptionRepository jobRepos, CarPartRepository carPartRepos) {
         this.jobRepos = jobRepos;
         this.carPartRepos = carPartRepos;
     }
@@ -83,7 +82,7 @@ public class JobService {
     }
 
 
-    public JobDto transferToJobDto(JobDescription job) {
+    public static JobDto transferToJobDto(JobDescription job) {
 
 
         JobDto dto = new JobDto();
