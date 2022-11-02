@@ -1,10 +1,8 @@
 package com.example.carservicingstation.Dtos;
 
-import com.example.carservicingstation.Model.JobDescription;
 import com.example.carservicingstation.Model.RepairJobDescription;
 
 import java.util.Collection;
-import java.util.List;
 
 public class RepairDto {
 
@@ -14,7 +12,6 @@ public class RepairDto {
 
     private String repairDescription;
 
-    private Collection<RepairJobDescription> repairJobDescriptions;
 
 
 
@@ -42,11 +39,5 @@ public class RepairDto {
         this.repairDescription = repairDescription;
     }
 
-    public Collection<RepairJobDescription> getRepairJobDescriptions() {
-        return repairJobDescriptions;
-    }
 
-    public void setRepairJobDescriptions(Collection<RepairJobDescription> repairJobDescriptions) {
-        this.repairJobDescriptions = repairJobDescriptions;
-    }
 }

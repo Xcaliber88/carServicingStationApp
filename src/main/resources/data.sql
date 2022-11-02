@@ -46,7 +46,9 @@ INSERT INTO         repairs (id, repair_name, repair_description)
 INSERT INTO repair_job_description (job_id, repair_id)
                         VALUES (3001, 4001),
                                (3002,4001),
-                               (3003, 4001);
+                               (3003, 4001),
+                               (3001, 4002),
+                               (3006,4002);
 
 
 

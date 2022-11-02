@@ -2,6 +2,7 @@ package com.example.carservicingstation.Controllers;
 
 import com.example.carservicingstation.Dtos.JobDto;
 import com.example.carservicingstation.Dtos.RepairDto;
+import com.example.carservicingstation.Model.RepairJobDescription;
 import com.example.carservicingstation.Repositories.RepairRepository;
 import com.example.carservicingstation.Services.RepairJobDescriptionService;
 import com.example.carservicingstation.Services.RepairService;
@@ -18,13 +19,14 @@ import java.util.Optional;
 public class RepairControllers {
 
     private final RepairService service;
-    private final RepairRepository repairRepos;
+
+//    private final RepairRepository repairRepos;
 
     private final RepairJobDescriptionService repairJobService;
 
     public RepairControllers(RepairService service, RepairRepository repairRepos, RepairJobDescriptionService repairJobService) {
         this.service = service;
-        this.repairRepos = repairRepos;
+//        this.repairRepos = repairRepos;
         this.repairJobService = repairJobService;
     }
 
@@ -75,6 +77,11 @@ public class RepairControllers {
     @GetMapping("/repairs/jobs/{repairId}")
     public Collection<JobDto> getJobByRepairId(@PathVariable("repairId") Long repairId){
         return repairJobService.getRepairJobDescriptionByRepairId(repairId);
+    }
+
+    @GetMapping("/repairs/jobs")
+    public Collection<JobDto> getJobByRepairName(@RequestParam(value = "repairName", required = false) String repairName){
+        return repairJobService.getRepairJobDescriptionByRepairName(repairName);
     }
 
 

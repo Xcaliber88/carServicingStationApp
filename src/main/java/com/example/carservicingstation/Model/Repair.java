@@ -1,5 +1,6 @@
 package com.example.carservicingstation.Model;
 
+import com.example.carservicingstation.Dtos.JobDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -65,4 +66,6 @@ public class Repair {
     public void setRepairJobDescriptions(Collection<RepairJobDescription> repairJobDescriptions) {
         this.repairJobDescriptions = repairJobDescriptions;
     }
+
+
 }

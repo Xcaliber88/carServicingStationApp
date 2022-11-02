@@ -15,6 +15,5 @@ public interface RepairJobDescriptionRepository extends JpaRepository<RepairJobD
 
         Collection<RepairJobDescription> findAllByJobId(Long jobId);
 
-
-
-        }
+        Collection<RepairJobDescription> findRepairJobDescriptionByRepair_RepairName(String repairName);
+}

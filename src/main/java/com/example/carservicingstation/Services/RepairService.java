@@ -2,7 +2,6 @@ package com.example.carservicingstation.Services;
 
 
 import com.example.carservicingstation.Dtos.RepairDto;
-import com.example.carservicingstation.Model.JobDescription;
 import com.example.carservicingstation.Model.Repair;
 import com.example.carservicingstation.Repositories.JobDescriptionRepository;
 import com.example.carservicingstation.Repositories.RepairRepository;
@@ -21,9 +20,12 @@ public class RepairService {
 
     private final JobDescriptionRepository jobRepos;
 
-    public RepairService(RepairRepository repairRepos, JobDescriptionRepository jobRepos) {
+    private final RepairJobDescriptionService repairJobService;
+
+    public RepairService(RepairRepository repairRepos, JobDescriptionRepository jobRepos, RepairJobDescriptionService repairJobService) {
         this.repairRepos = repairRepos;
         this.jobRepos = jobRepos;
+        this.repairJobService = repairJobService;
     }
 
     public List<RepairDto> getAllRepair() {
@@ -88,9 +90,9 @@ public class RepairService {
             if (!(repairDto.getRepairDescription() == null)) {
                 repair.setRepairDescription(repairDto.getRepairDescription());
             }
-            if (!(repairDto.getRepairJobDescriptions() == null)) {
-                repair.setRepairJobDescriptions(repairDto.getRepairJobDescriptions());
-            }
+//            if (!(repairDto.getRepairJobDescriptions() == null)) {
+//                repair.setRepairJobDescriptions(repairDto.getRepairJobDescriptions());
+//            }
 
             repairRepos.save(repair);
 
