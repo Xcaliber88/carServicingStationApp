@@ -1,4 +1,4 @@
-INSERT INTO cars (id, brand_name, model, year_built, colour, registration_no, owners_first_name, owners_last_name, owners_email, owners_phone_no)
+INSERT INTO cars (id, brand_name, model, year_built, colour, registration_no, first_name, last_name, owners_email, owners_phone_no)
                     VALUES (1001,'Mercedes', 'C180', 2020, 'Metalic_black', 'K-345-JL', 'Jan', 'Jansen', 'JanJansen@hotmail.com', 310612345678),
                            (1002, 'BMW', 'X6M', 2022, 'Metalic_white', 'R-543-KK', 'Kees', 'Koters', 'KeesKoters@gmail.com', 310652987321 ),
                            (1003, 'Audi', 'Etron_55', 2019, 'Metalic_blue', 'J-888-PK', 'Willem', 'de_Wit', 'Willemdewit@yahoo.com', 310658654321);
@@ -49,6 +49,17 @@ INSERT INTO repair_job_description (job_id, repair_id)
                                (3003, 4001),
                                (3001, 4002),
                                (3006,4002);
+
+INSERT INTO users (username, password, email, enabled) VALUES ('user', '$2a$10$0H9cheY9sNwnrFeghHWTweTSAq8ljWIwMM1AJ119J8fTpUjm4LBsu','user@test.nl', TRUE);
+INSERT INTO users (username, password, email, enabled) VALUES ('john_parts', '$2a$10$0H9cheY9sNwnrFeghHWTweTSAq8ljWIwMM1AJ119J8fTpUjm4LBsu','j.parts@ev4u.com', TRUE);
+INSERT INTO users (username, password, email, enabled) VALUES ('evi_brown_front_office', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica','e.brown@ev4u.com', TRUE);
+INSERT INTO users (username, password, email, enabled) VALUES ('ev4u_admin', '$2a$10$idshQogvSCbwIoSbuOVNy.s6F4fu.OOev0xQDLJeBh1ZENiyQkFjy', 'admin@ev4u.com', TRUE);
+
+INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('evi_brown_front_office', 'ROLE_FRONTOFFICE');
+INSERT INTO authorities (username, authority) VALUES ('john_parts', 'ROLE_MECHANIC');
+INSERT INTO authorities (username, authority) VALUES ('ev4u_admin', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('ev4u_admin', 'ROLE_ADMIN');
 
 
 

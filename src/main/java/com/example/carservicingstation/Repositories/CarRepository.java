@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface CarRepository extends JpaRepository<Car, Long> {
 
-    List<Car>findAllCarsByOwnersLastNameEqualsIgnoreCase(String ownersLastName);
+    List<Car>findAllCarsByLastNameEqualsIgnoreCase(String lastName);
     List<Car>findAllCarsByBrandNameEqualsIgnoreCase(String brandName);
 }
