@@ -29,8 +29,8 @@ public class CarService {
         }
         return carDtoList;
     }
-    public List<CarDto> getAllCarsByOwnersLastName(String ownersLastName){
-        List<Car> carList = carRepos.findAllCarsByOwnersLastNameEqualsIgnoreCase(ownersLastName);
+    public List<CarDto> getAllCarsByLastName(String lastName){
+        List<Car> carList = carRepos.findAllCarsByLastNameEqualsIgnoreCase(lastName);
 
         List<CarDto> carDtoList = new ArrayList<>();
 
@@ -71,8 +71,8 @@ public class CarService {
             if(!(carDto.getYearBuilt()<=0)){car.setYearBuilt(carDto.getYearBuilt());}
             if(!(carDto.getColour()==null)){car.setColour(carDto.getColour());}
             if(!(carDto.getRegistrationNo()==null)){car.setRegistrationNo(carDto.getRegistrationNo());}
-            if(!(carDto.getOwnersFirstName()==null)){car.setOwnersFirstName(carDto.getOwnersFirstName());}
-            if(!(carDto.getOwnersLastName()==null)){car.setOwnersLastName(carDto.getOwnersLastName());}
+            if(!(carDto.getFirstName()==null)){car.setFirstName(carDto.getFirstName());}
+            if(!(carDto.getLastName()==null)){car.setLastName(carDto.getLastName());}
             if(!(carDto.getOwnersEmail()==null)){car.setOwnersEmail(carDto.getOwnersEmail());}
             if(!(carDto.getOwnersPhoneNo()==null)){car.setOwnersPhoneNo(car.getOwnersPhoneNo());}
 
@@ -97,8 +97,8 @@ public class CarService {
         dto.setModel(car.getModel());
         dto.setRegistrationNo(car.getRegistrationNo());
         dto.setYearBuilt(car.getYearBuilt());
-        dto.setOwnersFirstName(car.getOwnersFirstName());
-        dto.setOwnersLastName(car.getOwnersLastName());
+        dto.setFirstName(car.getFirstName());
+        dto.setLastName(car.getLastName());
         dto.setOwnersEmail(car.getOwnersEmail());
         dto.setOwnersPhoneNo(car.getOwnersPhoneNo());
 
@@ -112,8 +112,8 @@ public class CarService {
         car.setColour(carDto.getColour());
         car.setRegistrationNo(carDto.getRegistrationNo());
         car.setYearBuilt(carDto.getYearBuilt());
-        car.setOwnersFirstName(carDto.getOwnersFirstName());
-        car.setOwnersLastName(carDto.getOwnersLastName());
+        car.setFirstName(carDto.getFirstName());
+        car.setLastName(carDto.getLastName());
         car.setOwnersPhoneNo(carDto.getOwnersPhoneNo());
         car.setOwnersEmail(carDto.getOwnersEmail());
 

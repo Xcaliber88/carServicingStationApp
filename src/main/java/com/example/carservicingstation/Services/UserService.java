@@ -1,13 +1,16 @@
 package com.example.carservicingstation.Services;
 
+import com.example.carservicingstation.Dtos.UpdateUserDto;
 import com.example.carservicingstation.Dtos.UserDto;
 import com.example.carservicingstation.Model.Authority;
+import com.example.carservicingstation.Model.JobDescription;
 import com.example.carservicingstation.Model.User;
 import com.example.carservicingstation.Repositories.UserRepository;
 import com.example.carservicingstation.Utils.RandomStringGenerator;
 import com.example.carservicingstation.exceptions.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,10 +20,15 @@ import java.util.Set;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
 //    @Autowired
+//    private PasswordEncoder encoder;
+
+
+    //    @Autowired
 //    private AuthorityRepository authorityRepository;
 
     public List<UserDto> getUsers() {
@@ -50,6 +58,8 @@ public class UserService {
     public String createUser(UserDto userDto) {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
+//        String encodedPw= passwordEncoder.encode(userDto.getPassword());
+//        userDto.setPassword(encoder.encode(userDto.password));
         User newUser = userRepository.save(toUser(userDto));
         return newUser.getUsername();
     }
@@ -58,10 +68,15 @@ public class UserService {
         userRepository.deleteById(username);
     }
 
-    public void updateUser(String username, UserDto newUser) {
+    public void updateUser(String username, UpdateUserDto newUser) {
         if (!userRepository.existsById(username)) throw new RecordNotFoundException();
         User user = userRepository.findById(username).get();
-        user.setPassword(newUser.getPassword());
+
+
+        if(!(newUser.getPassword()==null)){user.setPassword(newUser.getPassword());}
+//        if(!(newUser.getUsername()==null)){throw new RuntimeException("cannot change username");}
+        if(!(newUser.getEmail()==null)){user.setEmail(newUser.getEmail());}
+
         userRepository.save(user);
     }
 
@@ -114,5 +129,6 @@ public class UserService {
 
         return user;
     }
+
 
 }

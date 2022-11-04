@@ -14,22 +14,24 @@ public class Car {
     private int yearBuilt;
     private String colour;
     private String registrationNo;
-    private String ownersFirstName;
-    private String ownersLastName;
+
+    private String firstName;
+
+    private String lastName;
     private String ownersEmail;
     private Long ownersPhoneNo;
 
 
     public Car(){}
 
-    public Car(String brandName, String model, int yearBuilt, String colour, String registrationNo, String ownersFirstName, String ownersLastName, String ownersEmail, Long ownersPhoneNo) {
+    public Car(String brandName, String model, int yearBuilt, String colour, String registrationNo, String firstName, String lastName, String ownersEmail, Long ownersPhoneNo) {
         this.brandName = brandName;
         this.model = model;
         this.yearBuilt = yearBuilt;
         this.colour = colour;
         this.registrationNo = registrationNo;
-        this.ownersFirstName = ownersFirstName;
-        this.ownersLastName = ownersLastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.ownersEmail = ownersEmail;
         this.ownersPhoneNo = ownersPhoneNo;
 
@@ -73,21 +75,13 @@ public class Car {
         this.registrationNo = registrationNo;
     }
 
-    public String getOwnersFirstName() {
-        return ownersFirstName;
-    }
+    public String getFirstName() {return firstName;}
 
-    public void setOwnersFirstName(String ownersFirstName) {
-        this.ownersFirstName = ownersFirstName;
-    }
+    public void setFirstName(String firstName) {this.firstName = firstName;}
 
-    public String getOwnersLastName() {
-        return ownersLastName;
-    }
+    public String getLastName() {return lastName;}
 
-    public void setOwnersLastName(String ownersLastName) {
-        this.ownersLastName = ownersLastName;
-    }
+    public void setLastName(String lastName) {this.lastName = lastName;}
 
     public String getOwnersEmail() {
         return ownersEmail;

@@ -19,14 +19,14 @@ public class CarControllers {
         this.carService = carService;
     }
 
-    @GetMapping("/cars/lastName")
-    public ResponseEntity<List<CarDto>> getAllCarsByLastName(@RequestParam(value="ownersLastName", required = false) Optional<String> ownersLastName){
+    @GetMapping("/cars/lastname")
+    public ResponseEntity<List<CarDto>> getAllCarsByLastName(@RequestParam(value="lastName", required = false) Optional<String> lastName){
         List<CarDto> dtos;
 
-        if(!ownersLastName.isPresent()){
+        if(!lastName.isPresent()){
             dtos = carService.getAllCars();
         } else {
-            dtos = carService.getAllCarsByOwnersLastName(ownersLastName.get());
+            dtos = carService.getAllCarsByLastName(lastName.get());
         }
         return ResponseEntity.ok().body(dtos);
     }

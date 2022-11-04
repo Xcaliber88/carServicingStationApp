@@ -2,6 +2,7 @@ package com.example.carservicingstation.Model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @IdClass(AuthorityKey.class)
@@ -15,6 +16,10 @@ public class Authority implements Serializable {
     @Id
     @Column(nullable = false)
     private String authority;
+
+    @ManyToOne
+    @JoinColumn(name = "role")
+    private User user;
 
     public Authority() {}
     public Authority(String username, String authority) {
@@ -35,4 +40,11 @@ public class Authority implements Serializable {
         this.authority = authority;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

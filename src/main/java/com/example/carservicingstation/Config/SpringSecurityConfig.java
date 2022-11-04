@@ -49,13 +49,19 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users").permitAll()
+                .antMatchers("/authenticated").authenticated()
+                .antMatchers("/authenticate").permitAll()
+                .antMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/users").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
-                .antMatchers("/authenticated").authenticated()
-                .antMatchers("/authenticate").permitAll()
-                .anyRequest().permitAll()
+
+//               .anyRequest().permitAll()
+
+                .antMatchers("/cars").hasAnyRole("FRONTOFFICE", "ADMIN")
+                .antMatchers("/cars/**").hasAnyRole("FRONTOFFICE", "ADMIN")
+                .antMatchers("/car_parts").hasAnyRole("MECHANIC", "ADMIN")
+                .antMatchers("/car_parts/**").hasAnyRole("MECHANIC", "ADMIN")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

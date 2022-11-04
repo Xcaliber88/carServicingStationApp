@@ -1,10 +1,12 @@
 package com.example.carservicingstation.Controllers;
 
+import com.example.carservicingstation.Dtos.UpdateUserDto;
 import com.example.carservicingstation.Dtos.UserDto;
 import com.example.carservicingstation.Services.UserService;
 import com.example.carservicingstation.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -19,6 +21,11 @@ public class UserControllers {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder encoder;
+
+
 
     @GetMapping(value = "")
     public ResponseEntity<List<UserDto>> getUsers() {
@@ -39,9 +46,14 @@ public class UserControllers {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<UserDto> createKlant(@RequestBody UserDto dto) {;
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto dto) {;
+
+
+        dto.setPassword(encoder.encode(dto.getPassword()));
 
         String newUsername = userService.createUser(dto);
+
+
         userService.addAuthority(newUsername, "ROLE_USER");
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
@@ -50,16 +62,70 @@ public class UserControllers {
         return ResponseEntity.created(location).build();
     }
 
-    @PutMapping(value = "/{username}")
-    public ResponseEntity<UserDto> updateKlant(@PathVariable("username") String username, @RequestBody UserDto dto) {
+    @PostMapping(value = "/mechanic")
+    public ResponseEntity<UserDto> createMechanic(@RequestBody UserDto dto) {;
 
+
+        dto.setPassword(encoder.encode(dto.getPassword()));
+
+        String newUsername = userService.createUser(dto);
+
+
+        userService.addAuthority(newUsername, "ROLE_MECHANIC");
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
+                .buildAndExpand(newUsername).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @PostMapping(value = "/front_office")
+    public ResponseEntity<UserDto> createFrontOffice(@RequestBody UserDto dto) {;
+
+
+        dto.setPassword(encoder.encode(dto.getPassword()));
+
+        String newUsername = userService.createUser(dto);
+
+
+        userService.addAuthority(newUsername, "ROLE_FRONTOFFICE");
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
+                .buildAndExpand(newUsername).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+
+    @PutMapping(value = "/{username}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable("username") String username, @RequestBody UpdateUserDto dto) {
+
+        dto.setPassword(encoder.encode(dto.getPassword()));
+        userService.updateUser(username, dto);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/mechanic/{username}")
+    public ResponseEntity<UserDto> updateMechanic(@PathVariable("username") String username, @RequestBody UpdateUserDto dto) {
+
+        dto.setPassword(encoder.encode(dto.getPassword()));
+        userService.updateUser(username, dto);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/front_office/{username}")
+    public ResponseEntity<UserDto> updateFrontOffice(@PathVariable("username") String username, @RequestBody UpdateUserDto dto) {
+
+        dto.setPassword(encoder.encode(dto.getPassword()));
         userService.updateUser(username, dto);
 
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/{username}")
-    public ResponseEntity<Object> deleteKlant(@PathVariable("username") String username) {
+    public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
         userService.deleteUser(username);
         return ResponseEntity.noContent().build();
     }

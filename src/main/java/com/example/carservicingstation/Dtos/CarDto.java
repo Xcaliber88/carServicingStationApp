@@ -2,13 +2,14 @@ package com.example.carservicingstation.Dtos;
 
 public class CarDto {
     private Long id;
-
     private String brandName;
     private String model;
     private int yearBuilt;
     private String registrationNo;
-    private String ownersFirstName;
-    private String ownersLastName;
+
+    private String firstName;
+
+    private String lastName;
     private String ownersEmail;
     private Long ownersPhoneNo;
     private String colour;
@@ -54,21 +55,13 @@ public class CarDto {
         this.registrationNo = registrationNo;
     }
 
-    public String getOwnersFirstName() {
-        return ownersFirstName;
-    }
+    public String getFirstName() {return firstName;}
 
-    public void setOwnersFirstName(String ownersFirstName) {
-        this.ownersFirstName = ownersFirstName;
-    }
+    public void setFirstName(String firstName) {this.firstName = firstName;}
 
-    public String getOwnersLastName() {
-        return ownersLastName;
-    }
+    public String getLastName() {return lastName;}
 
-    public void setOwnersLastName(String ownersLastName) {
-        this.ownersLastName = ownersLastName;
-    }
+    public void setLastName(String lastName) {this.lastName = lastName;}
 
     public String getOwnersEmail() {
         return ownersEmail;
