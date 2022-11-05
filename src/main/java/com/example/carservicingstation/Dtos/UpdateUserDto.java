@@ -3,15 +3,22 @@ package com.example.carservicingstation.Dtos;
 import com.example.carservicingstation.Model.Authority;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class UpdateUserDto {
 
 
 
+    @NotBlank
+    @Size(min=5, max=30)
     public String password;
     public Boolean enabled;
     public String apikey;
+    @NotBlank
+    @Email
     public String email;
     @JsonSerialize
     public Set<Authority> authorities;

@@ -2,6 +2,8 @@ package com.example.carservicingstation.Dtos;
 
 import com.example.carservicingstation.Model.CarPart;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 public class JobDto {
@@ -12,8 +14,10 @@ public class JobDto {
 
     private String jobOverview;
 
+    @NotNull
     private int labourHours;
 
+    @NotNull
     private double hourlyLabourCost;
 
     private CarPart part;

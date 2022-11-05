@@ -2,24 +2,30 @@ package com.example.carservicingstation.Dtos;
 
 import com.example.carservicingstation.Model.JobDescription;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class CarPartDto {
 
     private Long id;
 
+    @NotBlank
     private String partName;
 
     private String partCategory;
 
     private String partDescription;
 
+    @NotNull
     private String originalStock;
 
     private String sold;
 
+    @NotBlank
     private String weight;
 
+    @NotNull
     private double price;
 
     private JobDescription job;

@@ -1,16 +1,33 @@
 package com.example.carservicingstation.Dtos;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class CarDto {
     private Long id;
+
+    @NotBlank
     private String brandName;
+
+    @NotBlank
     private String model;
+    @NotBlank
     private int yearBuilt;
+    @NotBlank
     private String registrationNo;
 
+    @NotBlank
     private String firstName;
 
+    @NotBlank
     private String lastName;
+    @NotBlank
+    @Email
     private String ownersEmail;
+    @NotNull
+    @Digits(integer=10,fraction = 0)
     private Long ownersPhoneNo;
     private String colour;
 
