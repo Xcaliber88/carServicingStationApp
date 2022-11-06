@@ -35,7 +35,7 @@ public class UploadDownloadWithDatabaseController {
 
         String contentType = file.getContentType();
 
-        return new FileUploadResponse(fileDocument.getFileName(), url, contentType );
+        return new FileUploadResponse(fileDocument.getFileName(), contentType, url );
     }
 
     //    get for single download
