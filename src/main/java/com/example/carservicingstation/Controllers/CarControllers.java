@@ -2,10 +2,14 @@ package com.example.carservicingstation.Controllers;
 
 import com.example.carservicingstation.Dtos.CarDto;
 import com.example.carservicingstation.Services.CarService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -44,21 +48,43 @@ public class CarControllers {
     }
 
     @PostMapping("/cars")
-    public ResponseEntity<Object> registerCar(@RequestBody CarDto carDto) {
-        CarDto dto= carService.registerCar(carDto);
+    public ResponseEntity<Object> registerCar(@Valid @RequestBody CarDto carDto, BindingResult br) {
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(dto.getId()).toUri();
+        if(br.hasErrors()){
+            StringBuilder sb = new StringBuilder();
+            for (FieldError fe: br.getFieldErrors()){
+                sb.append(fe.getField() + ": ");
+                sb.append(fe.getDefaultMessage());
+                sb.append("\n");
+            }
+            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        }
+        else{
+
+            CarDto dto= carService.registerCar(carDto);
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                    .buildAndExpand(dto.getId()).toUri();
 
         return ResponseEntity.created(location).body(dto);
+        }
     }
 
     @PutMapping("/cars/{id}")
-    public ResponseEntity<Object> updateCar(@PathVariable Long id, @RequestBody CarDto updateCar){
+    public ResponseEntity<Object> updateCar(@Valid @PathVariable Long id, @RequestBody CarDto updateCar, BindingResult br) {
 
-        CarDto dto = carService.updateCar(id, updateCar);
+        if (br.hasErrors()) {
+            StringBuilder sb = new StringBuilder();
+            for (FieldError fe : br.getFieldErrors()) {
+                sb.append(fe.getField() + ": ");
+                sb.append(fe.getDefaultMessage());
+                sb.append("\n");
+            }
+            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        } else {
+            CarDto dto = carService.updateCar(id, updateCar);
 
-        return ResponseEntity.ok().body(dto);
+            return ResponseEntity.ok().body(dto);
+        }
     }
 
     @DeleteMapping ("/cars/{id}")

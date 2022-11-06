@@ -63,9 +63,6 @@ public class CarService {
 
             Car car = carRepos.findById(id).get();
 
-           // Car updateCar = toCar(carDto);
-           // updateCar.setId(car.getId());
-
             if(!(carDto.getBrandName()==null)){car.setBrandName(carDto.getBrandName());}
             if(!(carDto.getModel()==null)){car.setModel(carDto.getModel());}
             if(!(carDto.getYearBuilt()<=0)){car.setYearBuilt(carDto.getYearBuilt());}

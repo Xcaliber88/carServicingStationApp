@@ -19,12 +19,12 @@ public class Car {
 
     private String lastName;
     private String ownersEmail;
-    private Long ownersPhoneNo;
+    private String ownersPhoneNo;
 
 
     public Car(){}
 
-    public Car(String brandName, String model, int yearBuilt, String colour, String registrationNo, String firstName, String lastName, String ownersEmail, Long ownersPhoneNo) {
+    public Car(String brandName, String model, int yearBuilt, String colour, String registrationNo, String firstName, String lastName, String ownersEmail, String ownersPhoneNo) {
         this.brandName = brandName;
         this.model = model;
         this.yearBuilt = yearBuilt;
@@ -91,11 +91,11 @@ public class Car {
         this.ownersEmail = ownersEmail;
     }
 
-    public Long getOwnersPhoneNo() {
+    public String getOwnersPhoneNo() {
         return ownersPhoneNo;
     }
 
-    public void setOwnersPhoneNo(Long ownersPhoneNo) {
+    public void setOwnersPhoneNo(String ownersPhoneNo) {
         this.ownersPhoneNo = ownersPhoneNo;
     }
 

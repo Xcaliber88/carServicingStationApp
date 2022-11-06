@@ -1,9 +1,8 @@
 package com.example.carservicingstation.Dtos;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.*;
 
 public class CarDto {
     private Long id;
@@ -13,7 +12,7 @@ public class CarDto {
 
     @NotBlank
     private String model;
-    @NotBlank
+    @NotNull
     private int yearBuilt;
     @NotBlank
     private String registrationNo;
@@ -27,8 +26,9 @@ public class CarDto {
     @Email
     private String ownersEmail;
     @NotNull
-    @Digits(integer=10,fraction = 0)
-    private Long ownersPhoneNo;
+    @Size(min=10, max =11)
+    @Pattern(regexp="^\\d{11}$", message ="Phone number must start with country code without + and the zero in the region code")
+    private String ownersPhoneNo;
     private String colour;
 
 
@@ -88,11 +88,11 @@ public class CarDto {
         this.ownersEmail = ownersEmail;
     }
 
-    public Long getOwnersPhoneNo() {
+    public String getOwnersPhoneNo() {
         return ownersPhoneNo;
     }
 
-    public void setOwnersPhoneNo(Long ownersPhoneNo) {
+    public void setOwnersPhoneNo(String ownersPhoneNo) {
         this.ownersPhoneNo = ownersPhoneNo;
     }
 
