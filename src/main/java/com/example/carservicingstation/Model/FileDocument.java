@@ -1,11 +1,11 @@
 package com.example.carservicingstation.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "uploads")
 public class FileDocument {
 
     @Id
@@ -16,6 +16,12 @@ public class FileDocument {
 
     @Lob
     private byte[] docFile;
+
+    @OneToOne(mappedBy = "fileDocument")
+    @JsonIgnore
+    private CarPart carPart;
+
+
 
 
     public String getFileName() {
@@ -32,5 +38,21 @@ public class FileDocument {
 
     public void setDocFile(byte[] docFile) {
         this.docFile = docFile;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public CarPart getCarPart() {
+        return carPart;
+    }
+
+    public void setCarPart(CarPart carPart) {
+        this.carPart = carPart;
     }
 }

@@ -39,6 +39,7 @@ public class DatabaseService {
         FileDocument fileDocument = new FileDocument();
         fileDocument.setFileName(name);
         fileDocument.setDocFile(file.getBytes());
+        System.out.println(file.getBytes());
 
         doc.save(fileDocument);
 

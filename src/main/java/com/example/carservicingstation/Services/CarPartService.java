@@ -1,24 +1,28 @@
 package com.example.carservicingstation.Services;
 
 import com.example.carservicingstation.Dtos.CarPartDto;
-import com.example.carservicingstation.Dtos.JobDto;
 import com.example.carservicingstation.Model.CarPart;
+import com.example.carservicingstation.Model.FileDocument;
 import com.example.carservicingstation.Model.JobDescription;
 import com.example.carservicingstation.Repositories.CarPartRepository;
+import com.example.carservicingstation.Repositories.DocFileRepository;
 import com.example.carservicingstation.exceptions.RecordNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarPartService {
 
     private final CarPartRepository carPartRepos;
+    private final DocFileRepository fileRepos;
 
-    public CarPartService(CarPartRepository carPartRepos) {
+    public CarPartService(CarPartRepository carPartRepos, DocFileRepository fileRepos) {
         this.carPartRepos = carPartRepos;
+        this.fileRepos = fileRepos;
     }
 
     public List<CarPartDto> getAllParts(){
@@ -111,6 +115,7 @@ public class CarPartService {
         dto.setWeight(part.getWeight());
         dto.setOriginalStock(part.getOriginalStock());
         dto.setSold(part.getSold());
+        dto.setFileDocument(part.getFileDocument());
 //        dto.setJob(part.getJob());
 
         return dto;
@@ -135,8 +140,24 @@ public class CarPartService {
         part.setOriginalStock(partDto.getOriginalStock());
         part.setSold(partDto.getSold());
         part.setPrice(partDto.getPrice());
+        part.setFileDocument(partDto.getFileDocument());
 //        part.setJob(partDto.getJob());
 
         return part;
+    }
+
+    public CarPartDto assignFileDocumentToCarPart(Long partId, Long fileId){
+        Optional<FileDocument> optionalFileDocument = fileRepos.findById(fileId);
+        Optional<CarPart> optionalCarPart = carPartRepos.findById(partId);
+
+        if (optionalCarPart.isPresent() && optionalFileDocument.isPresent()){
+            CarPart part = optionalCarPart.get();
+            FileDocument fileDocument = optionalFileDocument.get();
+            part.setFileDocument(fileDocument);
+            carPartRepos.save(part);
+            return transferToCarPartDto(part);
+        } else {
+            throw new RuntimeException("car part or image does not exist");
+        }
     }
 }

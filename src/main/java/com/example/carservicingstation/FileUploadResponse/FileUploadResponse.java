@@ -2,6 +2,7 @@ package com.example.carservicingstation.FileUploadResponse;
 
 public class FileUploadResponse {
 
+    Long id;
     String fileName;
     String contentType;
     String url;
