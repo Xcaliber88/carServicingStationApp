@@ -25,7 +25,6 @@ INSERT INTO car_parts (id, part_name, part_category, part_description, original_
                            (2012, 'LED head light', 'Lighting', 'LED light strip', 10,3, '2 pieces', 90),
                            (2013, 'Brake light bulb', 'lighting', 'LED brake light bulb', 50, 10, '2 pieces', 9.95);
 
-
 INSERT INTO job_description (id, jobs_name, job_overview, labour_hours, hourly_labour_cost, part_id)
                     VALUES (3001, 'Motor oil change', 'Flush old oil and refill ',3, 39,2001),
                            (3002, 'Filter change', 'replacing old filter with new one',6, 39,2005),
@@ -48,7 +47,6 @@ INSERT INTO         repairs (id, repair_name, repair_description)
                            (4002, 'Minor Service', 'Service at intervals of 20000KM'),
                            (4003, 'Apk Keuring', 'Yearly vehicle testing'),
                            (4004, 'Part change', 'Defective part replacement');
-
 
 INSERT INTO repair_job_description (job_id, repair_id)
                     VALUES  (3001,4001),
