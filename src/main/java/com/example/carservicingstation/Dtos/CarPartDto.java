@@ -1,5 +1,6 @@
 package com.example.carservicingstation.Dtos;
 
+import com.example.carservicingstation.Model.FileDocument;
 import com.example.carservicingstation.Model.JobDescription;
 
 import javax.validation.constraints.NotBlank;
@@ -29,6 +30,8 @@ public class CarPartDto {
     private double price;
 
     private JobDescription job;
+
+    private FileDocument fileDocument;
 
 
     public Long getId() {
@@ -88,7 +91,6 @@ public class CarPartDto {
     }
 
 
-
     public double getPrice() {
         return price;
     }
@@ -98,4 +100,11 @@ public class CarPartDto {
     }
 
 
+    public FileDocument getFileDocument() {
+        return fileDocument;
+    }
+
+    public void setFileDocument(FileDocument fileDocument) {
+        this.fileDocument = fileDocument;
+    }
 }

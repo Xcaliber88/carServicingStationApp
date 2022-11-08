@@ -1,7 +1,14 @@
+
+--INSERT INTO uploads (id, file_name)
+                    --VALUES (8001, 'Motor_Oil_0W-30' );
+
 INSERT INTO cars (id, brand_name, model, year_built, colour, registration_no, first_name, last_name, owners_email, owners_phone_no)
                     VALUES (1001,'Mercedes', 'C180', 2020, 'Metalic_black', 'K-345-JL', 'Jan', 'Jansen', 'JanJansen@hotmail.com', 310612345678),
                            (1002, 'BMW', 'X6M', 2022, 'Metalic_white', 'R-543-KK', 'Kees', 'Koters', 'KeesKoters@gmail.com', 310652987321 ),
                            (1003, 'Audi', 'Etron_55', 2019, 'Metalic_blue', 'J-888-PK', 'Willem', 'de_Wit', 'Willemdewit@yahoo.com', 310658654321);
+
+--INSERT INTO car_parts (id, part_name, part_category, part_description, original_stock, sold, weight, price, file_document_id)
+                 -- VALUES (2001, 'Motor oil 0W-30', 'Lubricators','0W-30', 10, 0, '1L', 9.95, 8001);
 
 INSERT INTO car_parts (id, part_name, part_category, part_description, original_stock, sold, weight, price)
                     VALUES (2001, 'Motor oil 0W-30', 'Lubricators','0W-30', 10, 0, '1L', 9.95),
@@ -17,7 +24,6 @@ INSERT INTO car_parts (id, part_name, part_category, part_description, original_
                            (2011, 'AC-Fluid', 'Cooling System', 'AC Fluid anti-freeze 10L', 30,7, '10L', 19.95),
                            (2012, 'LED head light', 'Lighting', 'LED light strip', 10,3, '2 pieces', 90),
                            (2013, 'Brake light bulb', 'lighting', 'LED brake light bulb', 50, 10, '2 pieces', 9.95);
-
 
 INSERT INTO job_description (id, jobs_name, job_overview, labour_hours, hourly_labour_cost, part_id)
                     VALUES (3001, 'Motor oil change', 'Flush old oil and refill ',3, 39,2001),
@@ -42,13 +48,14 @@ INSERT INTO         repairs (id, repair_name, repair_description)
                            (4003, 'Apk Keuring', 'Yearly vehicle testing'),
                            (4004, 'Part change', 'Defective part replacement');
 
-
 INSERT INTO repair_job_description (job_id, repair_id)
-                        VALUES (3001, 4001),
-                               (3002,4001),
-                               (3003, 4001),
-                               (3001, 4002),
-                               (3006,4002);
+                    VALUES  (3001,4001),
+                            (3002,4001),
+                            (3003,4001),
+                            (3001,4002),
+                            (3006,4002);
+
+
 
 INSERT INTO users (username, password, email, enabled) VALUES ('user', '$2a$10$0H9cheY9sNwnrFeghHWTweTSAq8ljWIwMM1AJ119J8fTpUjm4LBsu','user@test.nl', TRUE);
 INSERT INTO users (username, password, email, enabled) VALUES ('john_parts', '$2a$10$0H9cheY9sNwnrFeghHWTweTSAq8ljWIwMM1AJ119J8fTpUjm4LBsu','j.parts@ev4u.com', TRUE);

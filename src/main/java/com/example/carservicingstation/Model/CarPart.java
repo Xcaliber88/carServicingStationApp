@@ -32,6 +32,9 @@ public class CarPart {
     @JsonIgnore
     private JobDescription job;
 
+    @OneToOne
+    private FileDocument fileDocument;
+
 
     public CarPart(){}
     public CarPart(Long id, String partName, String partCategory, String partDescription, String originalStock, String sold, String weight, double price) {
@@ -115,5 +118,13 @@ public class CarPart {
 
     public void setJob(JobDescription job) {
         this.job = job;
+    }
+
+    public FileDocument getFileDocument() {
+        return fileDocument;
+    }
+
+    public void setFileDocument(FileDocument fileDocument) {
+        this.fileDocument = fileDocument;
     }
 }

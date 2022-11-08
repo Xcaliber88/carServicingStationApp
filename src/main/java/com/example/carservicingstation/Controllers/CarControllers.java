@@ -26,6 +26,7 @@ public class CarControllers {
     @GetMapping("/cars/lastname")
     public ResponseEntity<List<CarDto>> getAllCarsByLastName(@RequestParam(value="lastName", required = false) Optional<String> lastName){
         List<CarDto> dtos;
+        System.out.println();
 
         if(!lastName.isPresent()){
             dtos = carService.getAllCars();

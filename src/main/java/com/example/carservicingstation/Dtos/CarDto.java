@@ -3,6 +3,7 @@ package com.example.carservicingstation.Dtos;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.*;
+import java.util.Objects;
 
 public class CarDto {
     private Long id;
@@ -30,6 +31,33 @@ public class CarDto {
     @Pattern(regexp="^\\d{11}$", message ="Phone number must start with country code without + and the zero in the region code")
     private String ownersPhoneNo;
     private String colour;
+
+    public CarDto(){}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CarDto dto = (CarDto) o;
+        return yearBuilt == dto.yearBuilt && Objects.equals(id, dto.id) && Objects.equals(brandName, dto.brandName) && Objects.equals(model, dto.model) && Objects.equals(registrationNo, dto.registrationNo) && Objects.equals(firstName, dto.firstName) && Objects.equals(lastName, dto.lastName) && Objects.equals(ownersEmail, dto.ownersEmail) && Objects.equals(ownersPhoneNo, dto.ownersPhoneNo) && Objects.equals(colour, dto.colour);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, brandName, model, yearBuilt, registrationNo, firstName, lastName, ownersEmail, ownersPhoneNo, colour);
+    }
+
+    public CarDto(String brandName, String model, int yearBuilt, String colour, String registrationNo, String firstName, String lastName, String ownersEmail, String ownersPhoneNo) {
+        this.brandName = brandName;
+        this.model = model;
+        this.yearBuilt = yearBuilt;
+        this.colour = colour;
+        this.registrationNo = registrationNo;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.ownersEmail = ownersEmail;
+        this.ownersPhoneNo = ownersPhoneNo;
+    }
 
 
     public Long getId() {

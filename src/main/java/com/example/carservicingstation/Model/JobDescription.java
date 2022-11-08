@@ -24,9 +24,6 @@ public class JobDescription {
     @OneToOne
     private CarPart part;
 
-
-
-
     @OneToMany(mappedBy = "repair")
     @JsonIgnore
     private List<RepairJobDescription> repairJobDescriptions;
