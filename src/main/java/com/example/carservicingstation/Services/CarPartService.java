@@ -107,9 +107,13 @@ public class CarPartService {
 
         if (!((foundPart.getJob())==null)) {
 
-            Optional<JobDescription> optionalJob = jobRepos.findById(foundPart.getJob().getId());
+            Long jobId = foundPart.getJob().getId();
+            Long partId= foundPart.getId();
+
+            Optional<JobDescription> optionalJob = jobRepos.findById(jobId);
             JobDescription foundJob = optionalJob.get();
-            jobService.removePart((foundJob.getId()), (foundPart.getId()));
+
+            jobService.removePart(jobId, partId);
             carPartRepos.deleteById(id);
 
         } else {
@@ -151,6 +155,7 @@ public class CarPartService {
     }
 
     public CarPartDto assignFileDocumentToCarPart(Long partId, Long fileId){
+
         Optional<FileDocument> optionalFileDocument = fileRepos.findById(fileId);
         Optional<CarPart> optionalCarPart = carPartRepos.findById(partId);
 
