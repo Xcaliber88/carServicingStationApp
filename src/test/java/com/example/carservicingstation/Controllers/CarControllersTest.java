@@ -37,7 +37,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CarControllers.class)
 class CarControllersTest {
 
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -70,7 +69,6 @@ class CarControllersTest {
     }
 
     @Test
-//    @Disabled
     @WithMockUser(username= "evi_brown_front_office",authorities = "FRONTOFFICE")
     void getAllCarsByLastName() throws Exception {
 

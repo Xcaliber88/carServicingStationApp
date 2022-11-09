@@ -40,7 +40,6 @@ class CarServiceTest {
     }
 
     @Test
-//    @Disabled
     void shouldRetrieveAllCars() {
         Car car1 = new Car("mercedes","C180", 2020, "Metalic_black","K-345-JL","Jan","Jansen","JanJansen@hotmail.com", "31612345678" );
         Car car2 = new Car("BMW", "X6M", 2022,"Metalic_white", "R-543-KK","Kees", "Koters", "Keeskoters@gmail.com", "31652987321");

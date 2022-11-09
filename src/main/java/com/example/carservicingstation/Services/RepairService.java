@@ -90,9 +90,6 @@ public class RepairService {
             if (!(repairDto.getRepairDescription() == null)) {
                 repair.setRepairDescription(repairDto.getRepairDescription());
             }
-//            if (!(repairDto.getRepairJobDescriptions() == null)) {
-//                repair.setRepairJobDescriptions(repairDto.getRepairJobDescriptions());
-//            }
 
             repairRepos.save(repair);
 
@@ -102,19 +99,6 @@ public class RepairService {
             throw new RecordNotFoundException("Auto onderdeel niet gevonden");
         }
     }
-
-//        if (repairRepos.findById(id).isEmpty())
-//            throw new RecordNotFoundException("Cannot find repair");
-//
-//        Repair currentRepair = repairRepos.findById(id).get();
-//
-//        Repair updatedRepair= toRepair(repairDto);
-//        updatedRepair.setId(id);
-//
-//        repairRepos.save(updatedRepair);
-//
-//        return transferToRepairDto(updatedRepair);
-//    }
 
     public RepairDto transferToRepairDto(Repair repair) {
 
@@ -137,5 +121,4 @@ public class RepairService {
 
         return repair;
     }
-
 }

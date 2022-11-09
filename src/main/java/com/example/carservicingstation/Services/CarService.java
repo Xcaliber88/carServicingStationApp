@@ -29,6 +29,7 @@ public class CarService {
         }
         return carDtoList;
     }
+
     public List<CarDto> getAllCarsByLastName(String lastName){
         List<Car> carList = carRepos.findAllCarsByLastNameEqualsIgnoreCase(lastName);
 
@@ -40,6 +41,7 @@ public class CarService {
         }
         return carDtoList;
     }
+
     public List<CarDto> getAllCarsByBrandName(String brandName){
         List<Car> carList = carRepos.findAllCarsByBrandNameEqualsIgnoreCase(brandName);
 
@@ -51,12 +53,14 @@ public class CarService {
         }
         return carDtoList;
     }
+
     public CarDto registerCar(CarDto carDto){
         Car savedCar= toCar(carDto);
         this.carRepos.save(savedCar);
 
         return transferToCarDto(savedCar);
     }
+
     public CarDto updateCar(Long id, CarDto carDto) {
 
         if(carRepos.findById(id).isPresent()){
@@ -81,6 +85,7 @@ public class CarService {
             throw new RecordNotFoundException("Geen auto gevonden");
         }
     }
+
     public void deleteCar(@RequestBody Long id) {
 
         carRepos.deleteById(id);
@@ -101,6 +106,7 @@ public class CarService {
 
         return dto;
     }
+
     public Car toCar(CarDto carDto){
         Car car = new Car();
 

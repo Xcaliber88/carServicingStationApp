@@ -24,13 +24,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private PasswordEncoder encoder;
-
-
-    //    @Autowired
-//    private AuthorityRepository authorityRepository;
-
     public List<UserDto> getUsers() {
         List<UserDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
@@ -58,8 +51,7 @@ public class UserService {
     public String createUser(UserDto userDto) {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
-//        String encodedPw= passwordEncoder.encode(userDto.getPassword());
-//        userDto.setPassword(encoder.encode(userDto.password));
+
         User newUser = userRepository.save(toUser(userDto));
         return newUser.getUsername();
     }
@@ -74,7 +66,7 @@ public class UserService {
 
 
         if(!(newUser.getPassword()==null)){user.setPassword(newUser.getPassword());}
-//        if(!(newUser.getUsername()==null)){throw new RuntimeException("cannot change username");}
+
         if(!(newUser.getEmail()==null)){user.setEmail(newUser.getEmail());}
 
         userRepository.save(user);
@@ -129,6 +121,4 @@ public class UserService {
 
         return user;
     }
-
-
 }

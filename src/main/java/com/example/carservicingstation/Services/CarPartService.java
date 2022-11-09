@@ -6,10 +6,13 @@ import com.example.carservicingstation.Model.FileDocument;
 import com.example.carservicingstation.Model.JobDescription;
 import com.example.carservicingstation.Repositories.CarPartRepository;
 import com.example.carservicingstation.Repositories.DocFileRepository;
+import com.example.carservicingstation.Repositories.JobDescriptionRepository;
+import com.example.carservicingstation.Repositories.RepairJobDescriptionRepository;
 import com.example.carservicingstation.exceptions.RecordNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +21,21 @@ import java.util.Optional;
 public class CarPartService {
 
     private final CarPartRepository carPartRepos;
+
     private final DocFileRepository fileRepos;
 
-    public CarPartService(CarPartRepository carPartRepos, DocFileRepository fileRepos) {
+    private final JobDescriptionRepository jobRepos;
+
+    private final JobService jobService;
+
+    private final RepairJobDescriptionRepository repairJobRepos;
+
+    public CarPartService(CarPartRepository carPartRepos, DocFileRepository fileRepos, JobDescriptionRepository jobRepos, JobService jobService, RepairJobDescriptionRepository repairJobRepos) {
         this.carPartRepos = carPartRepos;
         this.fileRepos = fileRepos;
+        this.jobRepos = jobRepos;
+        this.jobService = jobService;
+        this.repairJobRepos = repairJobRepos;
     }
 
     public List<CarPartDto> getAllParts(){
@@ -71,9 +84,6 @@ public class CarPartService {
         if(carPartRepos.findById(id).isPresent()){
             CarPart carPart = carPartRepos.findById(id).get();
 
-           // CarPart updateCarPart= toPart(partDto);
-            //updateCarPart.setId(carPart.getId());
-
             if(!(partDto.getPartName()==null)){carPart.setPartName(partDto.getPartName());}
             if(!(partDto.getPartCategory()==null)){carPart.setPartCategory(partDto.getPartCategory());}
             if(!(partDto.getPartDescription()==null)){carPart.setPartDescription(partDto.getPartDescription());}
@@ -90,22 +100,27 @@ public class CarPartService {
             throw new RecordNotFoundException("Auto onderdeel niet gevonden");
         }
     }
-    public void deleteCarPart(@RequestBody Long id){
+    public void deleteCarPart(@RequestBody Long id) {
 
-        carPartRepos.deleteById(id);
+        Optional<CarPart> optionalCarPart = carPartRepos.findById(id);
+        CarPart foundPart = optionalCarPart.get();
+
+        if (!((foundPart.getJob())==null)) {
+
+            Optional<JobDescription> optionalJob = jobRepos.findById(foundPart.getJob().getId());
+            JobDescription foundJob = optionalJob.get();
+            jobService.removePart((foundJob.getId()), (foundPart.getId()));
+            carPartRepos.deleteById(id);
+
+        } else {
+
+            carPartRepos.deleteById(id);
+        }
     }
+
     public CarPartDto transferToCarPartDto(CarPart part){
 
         CarPartDto dto= new CarPartDto();
-//        List<JobDescription> jobList = new ArrayList<>();
-//        List<JobDto> jobDtoList = new ArrayList<>();
-//
-//        for (JobDescription job : jobList) {
-//            JobDto dtos = JobService.transferToJobDto(job);
-//            jobDtoList.add(dtos);
-//
-//            dto.setJobDtoList(jobDtoList);
-//        }
 
         dto.setId(part.getId());
         dto.setPartCategory(part.getPartCategory());
@@ -116,22 +131,12 @@ public class CarPartService {
         dto.setOriginalStock(part.getOriginalStock());
         dto.setSold(part.getSold());
         dto.setFileDocument(part.getFileDocument());
-//        dto.setJob(part.getJob());
 
         return dto;
     }
     public CarPart toPart(CarPartDto partDto){
 
         CarPart part = new CarPart();
-//        List<JobDescription> jobList = new ArrayList<>();
-//        List<JobDto> jobDtoList = new ArrayList<>();
-//
-//        for (JobDto jobDto : jobDtoList) {
-//            JobDescription job = JobService.toJob(jobDto);
-//            jobList.add(job);
-//
-//            part.setJobs(jobList);
-//        }
 
         part.setPartName(partDto.getPartName());
         part.setPartCategory(partDto.getPartCategory());
@@ -141,7 +146,6 @@ public class CarPartService {
         part.setSold(partDto.getSold());
         part.setPrice(partDto.getPrice());
         part.setFileDocument(partDto.getFileDocument());
-//        part.setJob(partDto.getJob());
 
         return part;
     }

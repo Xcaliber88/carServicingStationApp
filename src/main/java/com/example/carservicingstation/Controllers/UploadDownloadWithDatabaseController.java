@@ -18,9 +18,7 @@ import java.util.Objects;
 @CrossOrigin
 @RestController
 public class UploadDownloadWithDatabaseController {
-
     private final DatabaseService databaseService;
-
     public UploadDownloadWithDatabaseController(DatabaseService databaseService) {
         this.databaseService = databaseService;
     }
@@ -28,8 +26,6 @@ public class UploadDownloadWithDatabaseController {
     @PostMapping("single/uploadDb")
     public FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
 
-
-        // next line makes url. example "http://localhost:8080/download/naam.jpg"
         FileDocument fileDocument = databaseService.uploadFileDocument(file);
         String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFromDB/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
 
@@ -38,14 +34,12 @@ public class UploadDownloadWithDatabaseController {
         return new FileUploadResponse(fileDocument.getFileName(), contentType, url );
     }
 
-    //    get for single download
     @GetMapping("/downloadFromDB/{fileName}")
     ResponseEntity<byte[]> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
 
         return databaseService.singleFileDownload(fileName, request);
     }
 
-    //    post for multiple uploads to database
     @PostMapping("/multiple/upload/db")
     List<FileUploadResponse> multipleUpload(@RequestParam("files") MultipartFile [] files) {
 
@@ -54,7 +48,6 @@ public class UploadDownloadWithDatabaseController {
         }
 
         return databaseService.createMultipleUpload(files);
-
     }
 
     @GetMapping("zipDownload/db")

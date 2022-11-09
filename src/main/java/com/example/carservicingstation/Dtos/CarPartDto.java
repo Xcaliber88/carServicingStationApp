@@ -90,7 +90,6 @@ public class CarPartDto {
         this.sold = sold;
     }
 
-
     public double getPrice() {
         return price;
     }
@@ -98,7 +97,6 @@ public class CarPartDto {
     public void setPrice(double price) {
         this.price = price;
     }
-
 
     public FileDocument getFileDocument() {
         return fileDocument;

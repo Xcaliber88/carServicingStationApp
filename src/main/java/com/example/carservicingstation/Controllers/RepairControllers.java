@@ -17,16 +17,12 @@ import java.util.Optional;
 
 @RestController
 public class RepairControllers {
-
     private final RepairService service;
-
-//    private final RepairRepository repairRepos;
-
     private final RepairJobDescriptionService repairJobService;
 
     public RepairControllers(RepairService service, RepairRepository repairRepos, RepairJobDescriptionService repairJobService) {
+
         this.service = service;
-//        this.repairRepos = repairRepos;
         this.repairJobService = repairJobService;
     }
 
@@ -83,6 +79,4 @@ public class RepairControllers {
     public Collection<JobDto> getJobByRepairName(@RequestParam(value = "repairName", required = false) String repairName){
         return repairJobService.getRepairJobDescriptionByRepairName(repairName);
     }
-
-
 }

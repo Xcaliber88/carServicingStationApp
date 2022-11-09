@@ -9,6 +9,7 @@ import java.util.List;
 public interface CarPartRepository extends JpaRepository<CarPart, Long> {
 
     List<CarPart>findAllCarPartsByPartNameEqualsIgnoreCase(String partName);
+
     List<CarPart>findAllCarPartsByPartCategoryEqualsIgnoreCase(String partCategory);
 
     List<CarPart> findAllById(Long jobId);

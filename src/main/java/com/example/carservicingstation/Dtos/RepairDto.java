@@ -13,8 +13,6 @@ public class RepairDto {
     private String repairDescription;
 
 
-
-
     public Long getId() {
         return id;
     }
@@ -38,6 +36,5 @@ public class RepairDto {
     public void setRepairDescription(String repairDescription) {
         this.repairDescription = repairDescription;
     }
-
 
 }

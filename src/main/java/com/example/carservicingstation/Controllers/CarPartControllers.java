@@ -14,13 +14,10 @@ import java.util.Optional;
 
 @RestController
 public class CarPartControllers {
-
     private final CarPartService partService;
-
     public CarPartControllers(CarPartService partService) {
         this.partService = partService;
     }
-
     @GetMapping("/car_parts/name")
     public ResponseEntity<List<CarPartDto>> getAllPartsByPartName(@RequestParam(value="partName", required = false)Optional<String> partName){
 

@@ -13,13 +13,10 @@ import java.util.Optional;
 
 @RestController
 public class JobControllers {
-
     private final JobService jobService;
-
     public JobControllers(JobService jobService) {
         this.jobService = jobService;
     }
-
     @GetMapping("/jobs/jobsName")
     public ResponseEntity<List<JobDto>> getAllJobs(@RequestParam(value = "jobsName", required = false)Optional<String>jobsName){
 

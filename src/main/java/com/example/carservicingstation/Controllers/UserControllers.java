@@ -18,14 +18,11 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/users")
 public class UserControllers {
-
     @Autowired
     private UserService userService;
 
     @Autowired
     private PasswordEncoder encoder;
-
-
 
     @GetMapping(value = "")
     public ResponseEntity<List<UserDto>> getUsers() {
@@ -42,17 +39,13 @@ public class UserControllers {
 
 
         return ResponseEntity.ok().body(optionalUser);
-
     }
 
     @PostMapping(value = "")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto dto) {;
 
-
         dto.setPassword(encoder.encode(dto.getPassword()));
-
         String newUsername = userService.createUser(dto);
-
 
         userService.addAuthority(newUsername, "ROLE_USER");
 
@@ -65,11 +58,8 @@ public class UserControllers {
     @PostMapping(value = "/mechanic")
     public ResponseEntity<UserDto> createMechanic(@RequestBody UserDto dto) {;
 
-
         dto.setPassword(encoder.encode(dto.getPassword()));
-
         String newUsername = userService.createUser(dto);
-
 
         userService.addAuthority(newUsername, "ROLE_MECHANIC");
 
@@ -82,11 +72,8 @@ public class UserControllers {
     @PostMapping(value = "/front_office")
     public ResponseEntity<UserDto> createFrontOffice(@RequestBody UserDto dto) {;
 
-
         dto.setPassword(encoder.encode(dto.getPassword()));
-
         String newUsername = userService.createUser(dto);
-
 
         userService.addAuthority(newUsername, "ROLE_FRONTOFFICE");
 
@@ -152,5 +139,4 @@ public class UserControllers {
         userService.removeAuthority(username, authority);
         return ResponseEntity.noContent().build();
     }
-
 }
