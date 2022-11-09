@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/repairJob")
 public class RepairJobDescriptionControllers {
-
     private final RepairJobDescriptionService repairJobService;
-
     public RepairJobDescriptionControllers(RepairService repairService, JobService jobService, RepairJobDescriptionService repairJobService) {
         this.repairJobService = repairJobService;
     }
@@ -22,7 +20,4 @@ public class RepairJobDescriptionControllers {
     public void addRepairJob(@PathVariable("repairId") Long repairId, @PathVariable("jobId") Long jobId) {
         repairJobService.addRepairJob(repairId, jobId);
     }
-
-
-
 }

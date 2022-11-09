@@ -81,6 +81,4 @@ public class RepairJobDescriptionService {
         repairJobRepos.save(repairJobDescription);
         return id;
     }
-
-
 }

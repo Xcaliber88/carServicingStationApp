@@ -4,7 +4,9 @@ public class FileUploadResponse {
 
     Long id;
     String fileName;
+
     String contentType;
+
     String url;
 
     public FileUploadResponse(String fileName, String contentType, String url) {

@@ -15,10 +15,13 @@ public class JobDescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String jobsName;
+
     private String jobOverview;
 
     private int labourHours;
+
     private double hourlyLabourCost;
 
     @OneToOne

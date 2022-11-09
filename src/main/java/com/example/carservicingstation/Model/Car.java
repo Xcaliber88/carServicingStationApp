@@ -9,16 +9,23 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String brandName;
+
     private String model;
+
     private int yearBuilt;
+
     private String colour;
+
     private String registrationNo;
 
     private String firstName;
 
     private String lastName;
+
     private String ownersEmail;
+
     private String ownersPhoneNo;
 
 

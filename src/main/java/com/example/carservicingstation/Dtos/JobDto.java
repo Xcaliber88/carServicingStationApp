@@ -22,7 +22,6 @@ public class JobDto {
 
     private CarPart part;
 
-
     public Long getId() {
         return id;
     }

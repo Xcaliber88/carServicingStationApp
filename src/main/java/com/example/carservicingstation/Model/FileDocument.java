@@ -22,8 +22,6 @@ public class FileDocument {
     private CarPart carPart;
 
 
-
-
     public String getFileName() {
         return fileName;
     }

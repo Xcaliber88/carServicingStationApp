@@ -66,6 +66,4 @@ public class Repair {
     public void setRepairJobDescriptions(Collection<RepairJobDescription> repairJobDescriptions) {
         this.repairJobDescriptions = repairJobDescriptions;
     }
-
-
 }

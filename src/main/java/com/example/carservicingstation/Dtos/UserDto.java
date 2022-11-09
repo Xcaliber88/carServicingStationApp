@@ -17,13 +17,18 @@ public class UserDto {
     @NotBlank
     @Size(min = 5, max=30)
     public String password;
+
     public Boolean enabled;
+
     public String apikey;
+
     @NotBlank
     @Email
     public String email;
+
     @JsonSerialize
     public Set<Authority> authorities;
+
 
     public String getUsername() {
         return username;

@@ -13,8 +13,10 @@ public class CarDto {
 
     @NotBlank
     private String model;
+
     @NotNull
     private int yearBuilt;
+
     @NotBlank
     private String registrationNo;
 
@@ -26,10 +28,12 @@ public class CarDto {
     @NotBlank
     @Email
     private String ownersEmail;
+
     @NotNull
     @Size(min=10, max =11)
     @Pattern(regexp="^\\d{11}$", message ="Phone number must start with country code without + and the zero in the region code")
     private String ownersPhoneNo;
+
     private String colour;
 
     public CarDto(){}
